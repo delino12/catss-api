@@ -1,6 +1,6 @@
 <?php
 // CATSS API
-require ("__factory/engine.php");
+include ("__factory/engine.php");
 
 
 if($_GET['cp'] && $_GET['token']){
@@ -12,9 +12,7 @@ if($_GET['cp'] && $_GET['token']){
 	$cats_engine->run();
 
 }else{
-	header("Access-Control-Allow-Origin: *");
-	header('Content-Type: application/json');
-	echo json_encode($data);
+	die('fail to send request !');
 }
 
 ?>
