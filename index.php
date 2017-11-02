@@ -3,10 +3,10 @@
 include ("__factory/engine.php");
 
 
-if($_GET['cp'] && $_GET['token']){
+if($_GET['cq'] && $_GET['token']){
 	// get check params
 	$token = $_GET['token'];
-	$type = $_GET['cp'];
+	$type = $_GET['cq'];
 
 	$cats_engine = new CatssApi($token, $type);
 	$cats_engine->run();
