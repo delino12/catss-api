@@ -14,6 +14,7 @@ class CatssApi
 		$this->type = $type;	
 	}
 
+	// this runs the api
 	public function run()
 	{
 		if($this->token !== '6b971eac2f876685b4ff2d07ffeb545c41B756F2DCAC80BFD910D1BED0633974'){
@@ -38,10 +39,17 @@ class CatssApi
 			}elseif ($this->type == 'trans_info') {
 				# code...
 				return $this->toJson(CatssApi::transactions());
+			}elseif ($this->type == 'index_news') {
+				# code...
+				return $this->toJson(CatssApi::stockIndex());
+			}elseif ($this->type == 'basic_info') {
+				# code...
+				return $this->toJson(CatssApi::basicInformation());
 			}
 		}
 	}
 
+	// load all equities
 	public function getPairs()
 	{
 		# code...
@@ -75,6 +83,7 @@ class CatssApi
 		return $pairs_box;
 	}
 
+	// get user account balance
 	public function getAcctBal()
 	{
 
@@ -87,6 +96,7 @@ class CatssApi
 		return $data;
 	}
 
+	// news updates
 	public function news()
 	{
 		
@@ -113,6 +123,7 @@ class CatssApi
 		return $pairs_box;
 	}
 
+	// user stock balance
 	public function stockBalance()
 	{
 		$stocks = array(
@@ -138,6 +149,7 @@ class CatssApi
 		return $pairs_box;
 	}
 
+	// transactions
 	public function transactions()
 	{
 		$stocks = array(
@@ -164,6 +176,57 @@ class CatssApi
 		return $pairs_box;
 	}
 
+	// stock price and closing index
+	public function stockIndex(){
+		# code...
+		$stocks = array(
+			'CAPOIL', 'DANGFLOUR', 'DIAMONDBNK', 'FCMB', 'FIDELITYBK',
+			'FLOURMILL', 'GOLDBREW', 'GUARANTY', 'GUINNESS', 'JAPAULOIL',
+			'JBERGER', 'LASACO', 'NNFM', 'NESTLE', 'OANDO',
+			'SKYEBANK', 'STANBIC', 'STERLNBANK', 'TOTAL', 'UNILEVER',
+			'TRANSEXPR', 'ZENITHBANK',
+		);
+
+
+		$pairs_box = [];
+		$total = count($stocks);
+		for ($i = 0; $i < $total; $i++) {
+			
+			$data = array(
+				'id' => $i,
+				'pairs' => $stocks[$i],
+				'open' => 1.20 + rand(1, 9),
+				'close' => 2.10 + rand(0, 9)
+			);
+
+			array_push($pairs_box, $data);
+		}
+
+		return $pairs_box;
+	}
+
+	// user basic information
+	public function basicInformation()
+	{
+		$info_box = [];
+
+		$informations = array(
+			'id' => '1',
+			'name' => 'Sammuel Bernard',
+			'email' => 'ekpotosammuel@gmail.com',
+			'gender' => 'male',
+			'address' => '16a Carodoso street off akinsanya lane Olodi-Apapa Lagos ',
+			'phone' => '08127160258',
+			'state' => 'Lagos State',
+			'avatar' => '458848899040.jpg'
+		);
+
+		array_push($info_box, $informations);
+
+		return $info_box;
+	}
+
+	// convert results to json
 	public function toJson($data)
 	{
 		header("Access-Control-Allow-Origin: *");
