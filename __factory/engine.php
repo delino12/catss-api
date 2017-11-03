@@ -65,19 +65,21 @@ class CatssApi
 		$pairs_box = [];
 		$total = count($stocks);
 		for ($i = 0; $i < $total; $i++) {
-			
-			$data = array(
-				'equity' => $stocks[$i],
-				'open_price' => 1.20 + rand(1, 9),
-				'close_price' => 2.10 + rand(0, 9),
-				'status' => 'open',
-				'traffic' => 'high',
-				'open_time' => '12:59:AM',
-				'close_time' => '10:59:PM',
-				'timing' => time()
-			);
-
-			array_push($pairs_box, $data);
+			# code...
+            $data = array(
+                "id" => $i,
+                "name" => $stocks[$i],
+                "start_price" => number_format(1.20 + rand(1, 9), 2),
+                "close_price" => number_format(2.10 + rand(0, 9), 2),
+                "old_start_price" => number_format(1.20 + rand(1, 9), 2),
+                "old_close_price" => number_format(1.20 + rand(1, 9), 2),
+                "status" => 'open',
+                "traffic" => 'high',
+                "start_time" => '8:59:AM',
+                "close_time" => '13:59:PM',
+                "timing" => date("M D ' y ") 
+            );
+            array_push($pair_box, $data);
 		}
 
 		return $pairs_box;
