@@ -71,7 +71,7 @@ class CatssApi
                 "start_price" => number_format(1.20 + rand(1, 9), 2),
                 "close_price" => number_format(2.10 + rand(0, 9), 2),
                 "old_start_price" => number_format(1.20 + rand(1, 9), 2),
-                "old_close_price" => number_format(1.20 + rand(1, 9), 2),
+                "old_close_price" => number_format(2.10 + rand(0, 9), 2),
                 "status" => 'open',
                 "traffic" => 'high',
                 "start_time" => '8:59:AM',
