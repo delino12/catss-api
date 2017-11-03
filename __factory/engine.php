@@ -61,7 +61,6 @@ class CatssApi
 			'TRANSEXPR', 'ZENITHBANK',
 		);
 
-
 		$pairs_box = [];
 		$total = count($stocks);
 		for ($i = 0; $i < $total; $i++) {
@@ -79,7 +78,7 @@ class CatssApi
                 "close_time" => '13:59:PM',
                 "timing" => date("M D ' y ") 
             );
-            array_push($pair_box, $data);
+            array_push($pairs_box, $data);
 		}
 
 		return $pairs_box;
