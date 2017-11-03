@@ -63,10 +63,12 @@ class CatssApi
 
 		$pairs_box = [];
 		$total = count($stocks);
+		$sn = 0 ;
 		for ($i = 0; $i < $total; $i++) {
 			# code...
+			$sn = $sn + 1;
             $data = array(
-                "id" => $i,
+                "id" => $sn,
                 "name" => $stocks[$i],
                 "start_price" => number_format(1.20 + rand(1, 9), 2),
                 "close_price" => number_format(2.10 + rand(0, 9), 2),
