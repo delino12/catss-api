@@ -29,12 +29,25 @@ class DBconnect
 			$this->database
 		);
 
-		if(mysqli_connect_errno())
-		{
-			return "Error creating connection ! <br />".mysqli_connect_error();
+		if(!$iConnect){
+			$msg = array(
+				'status' => 'error',
+				'message' => 'Fail to initilize connections !'
+			);
+			return DBconnect::toJson($msg);
+		}else{
+			return $iConnect;
 		}
+		
+	}
 
-		return $iConnect;
+	// convert results to json
+	public function toJson($data)
+	{
+		header("Access-Control-Allow-Origin: *");
+		header('Content-Type: application/json');
+		
+		echo json_encode($data);
 	}
 }
 ?>
