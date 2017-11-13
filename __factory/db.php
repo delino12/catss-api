@@ -30,11 +30,22 @@ class DBconnect
 		);
 
 		if(!$iConnect){
-			return "Error connecting to database";
+			$msg = array(
+				'status' => 'error',
+				'message' => 'error connecting to host server'
+			);
+			return DBconnect::toJson($msg);
 		}else{
 			return $iConnect;
 		}
 		
+	}
+
+
+	public function toJson($data){
+		header("Access-Control-Allow-Origin: *");
+		header('Content-Type: application/json');
+		echo json_encode($data);
 	}
 }
 ?>

@@ -254,7 +254,6 @@ class SignupUser extends DBconnect
 		
 		parent::__construct();
 		$this->plug = DBconnect::iConnect();
-		
 	}
 
 	public function save($name, $email, $password)
