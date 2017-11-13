@@ -8,8 +8,8 @@ $name = $_REQUEST['name'];
 $email = $_REQUEST['email'];
 $password = $_REQUEST['password'];
 
-$register_user = new SignupUser($token, $name, $email, $password);
-$register_user->save();
+$register_user = new SignupUser($token);
+$register_user->save($name, $email, $password);
 ?>
 
 

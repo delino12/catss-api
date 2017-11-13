@@ -245,14 +245,10 @@ class CatssApi
 */
 class SignupUser extends DBconnect
 {
-	protected $name;
-	protected $email;
-	protected $password;
 	protected $token;
-	
 	protected $plug;
 
-	function __construct($token, $name, $email, $password)
+	function __construct($token)
 	{
 		$this->token = $token;
 
@@ -266,7 +262,7 @@ class SignupUser extends DBconnect
 		
 	}
 
-	public function save()
+	public function save($name, $email, $password)
 	{
 		if($this->token !== '6b971eac2f876685b4ff2d07ffeb545c41B756F2DCAC80BFD910D1BED0633974'){
 			$data = array(
@@ -281,8 +277,8 @@ class SignupUser extends DBconnect
 
 			# query
 			$query = " INSERT INTO users (name, email, password, status) ";
-			$query .= " VALUES('".$this->name."', '".$this->email."', ";
-			$query .= " '".$this->password."', '".$status."') ";
+			$query .= " VALUES('".$name."', '".$email."', ";
+			$query .= " '".$password."', '".$status."') ";
 
 
 			$query_run = mysqli_query($this->plug, $query);
@@ -301,6 +297,26 @@ class SignupUser extends DBconnect
 			}
 			return CatssApi::toJson($msg);
 		}
+	}
+
+
+	public function loadUsers()
+	{
+		$query = " SELECT * FROM users ";
+		$query_run = mysqli_query($this->plug, $query);
+		if(!$query_run){
+			$msg = array(
+				'status' => 'error',
+				'message' => 'Fail to run fetch users query '
+			);
+		}else{
+			$msg = array(
+				'status' => 'success',
+				'message' => 'query actually run this time successful'
+			);
+			
+		}
+		return CatssApi::toJson($msg);
 	}
 
 	public function toJson($data){
