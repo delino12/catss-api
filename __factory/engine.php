@@ -287,7 +287,7 @@ class SignupUser extends DBconnect
 
 			$query_run = mysqli_query($this->plug, $query);
 			if(!$query_run){
-				$error_msg = mysqli_error($this->plug);
+				$error_msg = "Fail to run query";
 				$msg = array(
 					'status' => 'error',
 					'message' => $error_msg
