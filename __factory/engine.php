@@ -254,6 +254,20 @@ class SignupUser extends DBconnect
 
 	function __construct($token, $name, $email, $password)
 	{
+		$this->token = $token;
+
+		# code...
+		$this->name = $name;
+		$this->email = $email;
+		$this->password = $password;
+		
+		parent::__construct();
+		$this->plug = DBconnect::iConnect();
+		
+	}
+
+	public function save()
+	{
 		if($this->token !== '6b971eac2f876685b4ff2d07ffeb545c41B756F2DCAC80BFD910D1BED0633974'){
 			$data = array(
 				'status' => 'error',
@@ -261,38 +275,27 @@ class SignupUser extends DBconnect
 			);
 			return $this->toJson($data);
 		}else{
+
 			# code...
-			$this->name = $name;
-			$this->email = $email;
-			$this->password = $password;
-			
-			parent::__construct();
-			$this->plug = DBconnect::iConnect();
+			$status = 'active';
+
+			# query
+			$query = " INSERT INTO users (name, email, password, status) ";
+			$query .= " VALUES('".$this->name."', '".$this->email."', ";
+			$query .= " '".$this->password."', '".$status."') ";
+			if(mysqli_query($this->plug, $query)){
+				$msg = array(
+					'status' => 'success',
+					'msg' => 'user signup successful'
+				);
+			}else{
+				$msg = array(
+					'status' => 'error',
+					'msg' => 'fail to query store users '
+				);
+			}
+			return CatssApi::toJson($msg);
 		}
-	}
-
-	public function save()
-	{
-		# code...
-		$status = 'active';
-
-		# query
-		$query = " INSERT INTO users (name, email, password, status) ";
-		$query .= " VALUES('".$this->name."', '".$this->email."', ";
-		$query .= " '".$this->password."', '".$status."') ";
-		if(mysqli_query($this->plug, $query)){
-			$msg = array(
-				'status' => 'success',
-				'msg' => 'user signup successful'
-			);
-		}else{
-			$msg = array(
-				'status' => 'error',
-				'msg' => 'fail to query store users '
-			);
-		}
-
-		return CatssApi::toJson($msg);
 	}
 
 	public function toJson($data){

@@ -1,9 +1,7 @@
 <?php
 // set request access
 require ("../__factory/engine.php");
-?>
 
-<?php
 // request data
 $token = $_REQUEST['token'];
 $name = $_REQUEST['name'];
