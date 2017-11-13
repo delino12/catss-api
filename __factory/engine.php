@@ -283,16 +283,19 @@ class SignupUser extends DBconnect
 			$query = " INSERT INTO users (name, email, password, status) ";
 			$query .= " VALUES('".$this->name."', '".$this->email."', ";
 			$query .= " '".$this->password."', '".$status."') ";
-			if(mysqli_query($this->plug, $query)){
+			$query_run = mysqli_query($this->plug, $query);
+			if(!$query_run){
+				$error_msg = "Fail to run query ".mysqli_error($this->plug);
 				$msg = array(
-					'status' => 'success',
-					'msg' => 'user signup successful'
+					'status' => 'error',
+					'message' => $error_msg
 				);
 			}else{
 				$msg = array(
-					'status' => 'error',
-					'msg' => 'fail to query store users '
+					'status' => 'success',
+					'message' => 'user signup successful'
 				);
+				
 			}
 			return CatssApi::toJson($msg);
 		}
