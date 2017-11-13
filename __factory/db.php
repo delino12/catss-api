@@ -26,7 +26,7 @@ class DBconnect
 			$this->host,
 			$this->user,
 			$this->pass,
-			$this->database
+			$this->db
 		);
 
 		if(!$iConnect){
