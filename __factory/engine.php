@@ -283,9 +283,11 @@ class SignupUser extends DBconnect
 			$query = " INSERT INTO users (name, email, password, status) ";
 			$query .= " VALUES('".$this->name."', '".$this->email."', ";
 			$query .= " '".$this->password."', '".$status."') ";
+
+
 			$query_run = mysqli_query($this->plug, $query);
 			if(!$query_run){
-				$error_msg = "Fail to run query ".mysqli_error($this->plug);
+				$error_msg = mysqli_error($this->plug);
 				$msg = array(
 					'status' => 'error',
 					'message' => $error_msg
