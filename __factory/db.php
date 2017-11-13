@@ -30,24 +30,11 @@ class DBconnect
 		);
 
 		if(!$iConnect){
-			$msg = array(
-				'status' => 'error',
-				'message' => 'Fail to initilize connections !'
-			);
-			return DBconnect::toJson($msg);
+			return "Error connecting to database";
 		}else{
 			return $iConnect;
 		}
 		
-	}
-
-	// convert results to json
-	public function toJson($data)
-	{
-		header("Access-Control-Allow-Origin: *");
-		header('Content-Type: application/json');
-		
-		echo json_encode($data);
 	}
 }
 ?>
