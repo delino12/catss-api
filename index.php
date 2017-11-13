@@ -46,28 +46,28 @@
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
 	<script>
-	  	// Initialize Firebase
-		var config = {
-		    apiKey: "AIzaSyD4pzxS_Y3oxtG12mUElDyAwpgto2y-goM",
-		    authDomain: "test-433f7.firebaseapp.com",
-		    databaseURL: "https://test-433f7.firebaseio.com",
-		    projectId: "test-433f7",
-		    storageBucket: "test-433f7.appspot.com",
-		    messagingSenderId: "788695899626"
-		};
-	  	firebase.initializeApp(config);
 
-		var db = firebase.database();
-		var ref = db.ref();
-		var users = [];
-		var query = {
-		  name: 'Ekpoto Liberty',
-		  email: 'ekpoto.liberty@gmail.com',
-		  gender: 'male'
-		};
+	 //  	// Initialize Firebase
+		// var config = {
+		//     apiKey: "AIzaSyD4pzxS_Y3oxtG12mUElDyAwpgto2y-goM",
+		//     authDomain: "test-433f7.firebaseapp.com",
+		//     databaseURL: "https://test-433f7.firebaseio.com",
+		//     projectId: "test-433f7",
+		//     storageBucket: "test-433f7.appspot.com",
+		//     messagingSenderId: "788695899626"
+		// };
+	 //  	firebase.initializeApp(config);
+
+		// var db = firebase.database();
+		// var ref = db.ref();
+		// var users = [];
+		// var query = {
+		//   name: 'Ekpoto Liberty',
+		//   email: 'ekpoto.liberty@gmail.com',
+		//   gender: 'male'
+		// };
 	  	
-	  	ref.push(users[query]);
-
+	 //  	ref.push(users[query]);
 	</script>
 </body>
 </html>
