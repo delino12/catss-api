@@ -251,11 +251,6 @@ class SignupUser extends DBconnect
 	function __construct($token)
 	{
 		$this->token = $token;
-
-		# code...
-		$this->name = $name;
-		$this->email = $email;
-		$this->password = $password;
 		
 		parent::__construct();
 		$this->plug = DBconnect::iConnect();
