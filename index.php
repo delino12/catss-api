@@ -56,7 +56,18 @@
 	  };
 	  firebase.initializeApp(config);
 
-	  console.log(firebase.database());
+	  var db = firebase.database();
+	  var ref = db.ref();
+
+	  var query = {
+	  	name: 'Ekpoto Liberty',
+	  	email: 'ekpoto.liberty@gmail.com',
+	  	gender: 'male'
+	  };
+
+	  ref.child('users');
+	  ref.push(query);
+	  
 	</script>
 </body>
 </html>
