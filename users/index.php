@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 // set request access
 require ("../__factory/engine.php");
 
