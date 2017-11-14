@@ -343,4 +343,117 @@ class SignupUser extends DBconnect
 	}
 }
 
+/**
+* Register User
+*/
+class LoginUser extends DBconnect
+{
+	protected $plug;
+
+	function __construct()
+	{
+		parent::__construct();
+		$this->plug = DBconnect::iConnect();
+	}
+
+	public function login($data)
+	{
+		// recieved users information from json
+		$token = $data['token'];
+		$email = $data['email'];
+		$password = $data['password'];
+
+		if($token !== '6b971eac2f876685b4ff2d07ffeb545c41B756F2DCAC80BFD910D1BED0633974'){
+			$data = array(
+				'status' => 'error',
+				'message' => 'Error incorrect access token'
+			);
+			return $this->toJson($data);
+		}else{
+
+
+			// do login 
+			$query = " SELECT * FROM `users` WHERE(email ='".$email."' AND password ='".$password."') ";
+
+			// run query
+			$query_run = mysqli_query($this->plug, $query);
+			if(!$query_run){
+				$error_msg = "Fail to run query ".mysqli_error($this->plug);
+				$msg = array(
+					'status' => 'error',
+					'message' => $error_msg
+				);
+			}else{
+				if(!mysqli_num_rows($query_run)){
+					$msg = array(
+						'status' => 'error',
+						'message' => 'invalid login credentials'
+					);
+				}else{
+					$user_box = [];
+					while ($results = mysqli_fetch_array($query_run)) {
+						# code...
+						$data = array(
+							'id' => $results['id'],
+							'email' => $results['email'],
+							'state' => true
+						);
+
+						array_push($users_box, $data);
+					}
+					return $this->toJson($users_box);
+				}
+				return $this->toJson($msg);
+			}
+			return $this->toJson($msg);
+		}
+	}
+
+
+	public function loadUsers()
+	{
+		$query = " SELECT * FROM users ";
+		$query_run = mysqli_query($this->plug, $query);
+		if(!$query_run){
+			$msg = array(
+				'status' => 'error',
+				'message' => 'Fail to run fetch users query '
+			);
+		}else{
+
+			if(!mysqli_num_rows($query_run)){
+				$msg = array(
+					'status' => 'success',
+					'message' => 'No users has signed up yet'
+				);
+			}else{
+				$users_box = [];
+				while($results = mysqli_fetch_array($query_run)){
+					$data = array(
+						'id' => $results['id'],
+						'name' => $results['name'],
+						'email' => $results['email'],
+						'status' => $results['status']
+					);
+					array_push($users_box, $data);
+				}
+
+				$msg = array(
+					'status' => 'success',
+					'users' => $users_box
+				);
+				return CatssApi::toJson($msg);
+			}
+			return CatssApi::toJson($msg);
+		}
+		return CatssApi::toJson($msg);
+	}
+
+	public function toJson($data){
+		header("Access-Control-Allow-Origin: *");
+		header('Content-Type: application/json');
+		echo json_encode($data);
+	}
+}
+
 ?>
