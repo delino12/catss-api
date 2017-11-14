@@ -390,18 +390,16 @@ class LoginUser extends DBconnect
 						'message' => 'invalid login credentials'
 					);
 				}else{
-					$user_box = [];
+				
 					while ($results = mysqli_fetch_array($query_run)) {
 						# code...
-						$data = array(
+						$msg = array(
 							'id' => $results['id'],
 							'email' => $results['email'],
 							'state' => true
 						);
-
-						array_push($users_box, $data);
 					}
-					return $this->toJson($users_box);
+					return $this->toJson($msg);
 				}
 				return $this->toJson($msg);
 			}
