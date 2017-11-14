@@ -245,20 +245,23 @@ class CatssApi
 */
 class SignupUser extends DBconnect
 {
-	protected $token;
 	protected $plug;
 
-	function __construct($token)
+	function __construct()
 	{
-		$this->token = $token;
-		
 		parent::__construct();
 		$this->plug = DBconnect::iConnect();
 	}
 
-	public function save($name, $email, $password)
+	public function save($data)
 	{
-		if($this->token !== '6b971eac2f876685b4ff2d07ffeb545c41B756F2DCAC80BFD910D1BED0633974'){
+		// recieved users information from json
+		$token = $data['token'];
+		$name = $data['name'];
+		$email = $data['email'];
+		$password = $data['password'];
+
+		if($token !== '6b971eac2f876685b4ff2d07ffeb545c41B756F2DCAC80BFD910D1BED0633974'){
 			$data = array(
 				'status' => 'error',
 				'message' => 'Error incorrect access token'
@@ -289,7 +292,7 @@ class SignupUser extends DBconnect
 				);
 				
 			}
-			return CatssApi::toJson($msg);
+			return $this->toJson($msg);
 		}
 	}
 
