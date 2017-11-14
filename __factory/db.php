@@ -13,17 +13,17 @@ class DBconnect
 	
 	function __construct()
 	{
-		// # code...
-		// $this->host = 'localhost';
-		// $this->user = 'id3602735_catss';
-		// $this->pass = 'idorliberty12';
-		// $this->db = 'id3602735_catss';
-
 		# code...
 		$this->host = 'localhost';
-		$this->user = 'root';
-		$this->pass = '';
-		$this->db = 'catss_api';
+		$this->user = 'id3602735_catss';
+		$this->pass = 'idorliberty12';
+		$this->db = 'id3602735_catss';
+
+		// # code...
+		// $this->host = 'localhost';
+		// $this->user = 'root';
+		// $this->pass = '';
+		// $this->db = 'catss_api';
 	}
 
 	public function iConnect()
