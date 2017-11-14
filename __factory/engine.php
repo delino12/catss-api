@@ -304,11 +304,31 @@ class SignupUser extends DBconnect
 				'message' => 'Fail to run fetch users query '
 			);
 		}else{
-			$msg = array(
-				'status' => 'success',
-				'message' => 'query actually run this time successful'
-			);
-			
+
+			if(!mysqli_num_rows($query_run)){
+				$msg = array(
+					'status' => 'success',
+					'message' => 'No users has signed up yet'
+				);
+			}else{
+				$users_box = [];
+				while($results = mysqli_fetch_array($query_run)){
+					$data = array(
+						'id' => $results['id'],
+						'name' => $results['name'],
+						'email' => $results['email'],
+						'status' => $results['status']
+					);
+					array_push($users_box, $data);
+				}
+
+				$msg = array(
+					'status' => 'success',
+					'users' => $users_box
+				);
+				return CatssApi::toJson($msg);
+			}
+			return CatssApi::toJson($msg);
 		}
 		return CatssApi::toJson($msg);
 	}
