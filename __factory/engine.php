@@ -247,24 +247,47 @@ class SignupUser extends DBconnect
 {
 	protected $plug;
 
-	function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 		$this->plug = DBconnect::iConnect();
 	}
 
+	// flash back users data
+	public function mirrow($data)
+	{
+		$token    = $data['token'];
+		$name     = $data['name'];
+		$email    = $data['email'];
+		$password = $data['password'];
+
+		$flash_data = array(
+			'token' => $token,
+			'name'	=> $name,
+			'email'	=> $email,
+			'date'	=> date("M D Y' h:i a")
+		);
+		$this->toJson($flash_data);
+	}
+
+	// flash back save data
 	public function save($data)
 	{
 		// recieved users information from json
-		$token = $data['token'];
-		$name = $data['name'];
-		$email = $data['email'];
+		$token    = $data['token'];
+		$name     = $data['name'];
+		$email    = $data['email'];
 		$password = $data['password'];
 
 		if($token !== '6b971eac2f876685b4ff2d07ffeb545c41B756F2DCAC80BFD910D1BED0633974'){
 			$data = array(
-				'status' => 'error',
-				'message' => 'Error incorrect access token'
+				'status' 	=> 'error',
+				'message' 	=> 'Error incorrect access token',
+				'data'		=> [
+					'token' 	=> $token,
+					'name'		=> $name,
+					'email'		=> $email
+				]
 			);
 			return $this->toJson($data);
 		}else{
@@ -273,9 +296,9 @@ class SignupUser extends DBconnect
 			$status = 'active';
 
 			# query
-			$query = " INSERT INTO users (name, email, password, status) ";
+			$query = " INSERT INTO users (name, email, password, status, date) ";
 			$query .= " VALUES('".$name."', '".$email."', ";
-			$query .= " '".$password."', '".$status."') ";
+			$query .= " '".$password."', '".$status."', '".time()."') ";
 
 
 			$query_run = mysqli_query($this->plug, $query);
@@ -290,13 +313,13 @@ class SignupUser extends DBconnect
 					'status' => 'success',
 					'message' => 'user signup successful'
 				);
-				
 			}
+
 			return $this->toJson($msg);
 		}
 	}
 
-
+	// load all users 
 	public function loadUsers()
 	{
 		$query = " SELECT * FROM users ";
@@ -320,7 +343,8 @@ class SignupUser extends DBconnect
 						'id' => $results['id'],
 						'name' => $results['name'],
 						'email' => $results['email'],
-						'status' => $results['status']
+						'status' => $results['status'],
+						'date'	=>	date("M D Y' h:i a", $results['date'])
 					);
 					array_push($users_box, $data);
 				}
@@ -431,7 +455,8 @@ class LoginUser extends DBconnect
 						'id' => $results['id'],
 						'name' => $results['name'],
 						'email' => $results['email'],
-						'status' => $results['status']
+						'status' => $results['status'],
+						'date'	=> $results['date']
 					);
 					array_push($users_box, $data);
 				}

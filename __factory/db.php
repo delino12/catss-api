@@ -19,7 +19,7 @@ class DBconnect
 		// $this->pass = 'idorliberty12';
 		// $this->db = 'id3602735_catss';
 
-		# code...
+		// # code...
 		$this->host = 'localhost';
 		$this->user = 'root';
 		$this->pass = '';

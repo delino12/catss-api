@@ -103,7 +103,9 @@ class AppReset
 				  `name` varchar(255) NOT NULL,
 				  `email` varchar(255) NOT NULL,
 				  `password` varchar(255) NOT NULL,
-				  `status` varchar(255) NOT NULL
+				  `status` varchar(255) NOT NULL,
+				  `date` varchar(255) NOT NULL
+
 				) ENGINE=InnoDB DEFAULT CHARSET=latin1';
 		$execute = mysqli_query($plug, $query);
 
