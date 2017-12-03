@@ -54,7 +54,7 @@
 
 				<div class="panel panel-info panel-heading">
 					<h3>CATSS (Login)</h3>
-					<p><u>http://localhost:8000/api/catss/login/</u></p>
+					<p><u></u></p>
 					<table class="table">
 						<thead>
 							<tr>
@@ -66,16 +66,16 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>Login (POST)</td>
+								<td>Login (POST) http://localhost:8000/api/catss/login/</td>
 								<td><pre class="l_request"></pre></td>
 								<td><pre class="l_response"></pre></td>
 								<td><pre class="l_error"></pre></td>
 							</tr>
 							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td>Account Balance (GET) http://localhost:8000/api/catss/accounts/</td>
+								<td><pre class="a_request"></pre></td>
+								<td><pre class="a_response"></pre></td>
+								<td><pre class="a_error"></pre></td>
 							</tr>
 							<tr>
 								<td></td>
@@ -149,6 +149,29 @@
 		$(".l_request").html(JSON.stringify(lReq, undefined, 2)); // For jQuery
 		$(".l_response").html(JSON.stringify(lRes, undefined, 2));
 		$(".l_error").html(JSON.stringify(lError, undefined, 2));
+
+
+		// API Request
+		var aReq = {  
+	        token: 'ACCESS_TOKEN',
+			id: 1003,
+		};
+
+		// API Response
+		var aRes = {
+		    "account_balance": "10,000,000.00",
+		    "profile_image": null
+		};
+
+		// API Response
+		var aError = {
+		    "status": "error",
+		    "message": "invalid request"
+		};
+
+		$(".a_request").html(JSON.stringify(aReq, undefined, 2)); // For jQuery
+		$(".a_response").html(JSON.stringify(aRes, undefined, 2));
+		$(".a_error").html(JSON.stringify(aError, undefined, 2));
 	</script>
 	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
 </body>
